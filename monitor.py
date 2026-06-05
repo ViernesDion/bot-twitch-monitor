@@ -1,8 +1,24 @@
-import os
 import asyncio
 import requests
 from twitchAPI.twitch import Twitch
 from twitchAPI.helper import first
+import os
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+class DummyHandler(BaseHTTPRequestHandler):
+	def do_GET(self):
+		self.send_response(200)
+		self.send_header('Content-Type', 'text/plain')
+		self.end_headers()
+		self.wfile.write(b"Bot da Twitch Online e operando!")
+def manter_vivo():
+	porta = int(os.environ.get("PORT", 8080))
+	servidor = HTTPServer(('0.0.0.0', porta), DummyHandler)
+	servidor.serve_forever()
+
+threading.Thread(target=manter_vivo, daemon=True).start()
+
 
 CLIENT_ID = os.environ.get('TWITCH_CLIENT_ID')
 CLIENT_SECRET = os.environ.get('TWITCH_CLIENT_SECRET')
