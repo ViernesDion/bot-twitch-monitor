@@ -1,15 +1,27 @@
-# 🤖 Twitch Live Monitor Bot
+# Twitch Live Notifier 🚀
 
-Um bot assíncrono desenvolvido em Python para monitorar o status de transmissões na Twitch de forma contínua, enviando notificações push em tempo real para o celular sempre que um streamer entra ao vivo ou troca de jogo.
+Um bot de monitoramento leve e eficiente, desenvolvido em Python, para notificar o status de streamers da Twitch em tempo real via [Ntfy.sh](https://ntfy.sh/).
 
-## 🚀 Tecnologias Utilizadas
-* **Python 3:** Linguagem principal do projeto.
-* **asyncio:** Para rodar o loop de monitoramento de forma assíncrona, sem travar o sistema.
-* **TwitchAPI:** Integração oficial e autenticação via OAuth2 com os servidores da Twitch.
-* **Ntfy (ntfy.sh):** Sistema de pub/sub para envio de notificações push via requisições HTTP (`requests`).
+## 💡 Motivação
+Desenvolvido para resolver um problema pessoal: as notificações nativas da Twitch nem sempre entregam o alerta no momento exato em que a live inicia. Além disso, este projeto serviu como estudo prático para conceitos de infraestrutura em nuvem, Git e automação.
 
-## ⚙️ Como funciona
-O bot roda em um servidor em background (daemon), consultando a Twitch a cada 60 segundos. Ele possui um sistema de "memória" em memória RAM para comparar o status atual da live com o status anterior, disparando alertas apenas quando ocorrem mudanças (Início da live, Troca de categoria/jogo ou Encerramento da live).
+## 🛠 Tecnologias Utilizadas
+*   **Linguagem:** Python
+*   **Integrações:** Twitch API, Ntfy.sh (notificações)
+*   **Infraestrutura:** Render (Web Service)
+*   **Monitoramento:** UptimeRobot (para evitar hibernação do plano free)
+*   **Versionamento:** Git & GitHub
 
-## 🔒 Segurança
-As credenciais da API (`CLIENT_ID` e `CLIENT_SECRET`) foram isoladas utilizando variáveis de ambiente (`os.environ`), garantindo que dados sensíveis não fiquem expostos no código-fonte.
+## ⚙️ Como funciona a Infraestrutura
+O plano gratuito do Render hiberna serviços inativos. Para garantir que o bot rode 24/7, implementei um "servidor fake" interno que:
+1.  Responde a requisições `GET` e `HEAD`.
+2.  Mantém a porta do serviço sempre ativa para o UptimeRobot.
+3.  Executa em uma `threading` separada para não bloquear a lógica principal do bot.
+
+## 🚀 Status do Projeto
+✅ Monitoramento ativo
+✅ Notificações em tempo real
+✅ Deploy automatizado com proteção contra hibernação
+
+---
+*Projeto desenvolvido como parte do portfólio de Ciência da Computação.*
