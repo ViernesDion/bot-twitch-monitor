@@ -12,6 +12,10 @@ class DummyHandler(BaseHTTPRequestHandler):
 		self.send_header('Content-Type', 'text/plain')
 		self.end_headers()
 		self.wfile.write(b"Bot da Twitch Online e operando!")
+	def do_HEAD(self):
+		self.send_response(200)
+		self.send_header('Content-type', 'text/plain')
+		self.end_headers()
 def manter_vivo():
 	porta = int(os.environ.get("PORT", 8080))
 	servidor = HTTPServer(('0.0.0.0', porta), DummyHandler)
