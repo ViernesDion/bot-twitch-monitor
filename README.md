@@ -1,27 +1,30 @@
 # Twitch Live Notifier 🚀
 
-Um bot de monitoramento leve e eficiente, desenvolvido em Python, para notificar o status de streamers da Twitch em tempo real via [Ntfy.sh](https://ntfy.sh/).
+A lightweight and efficient monitoring bot developed in Python to notify the status of Twitch streamers in real-time via Ntfy.sh.
 
-## 💡 Motivação
-Desenvolvido para resolver um problema pessoal: as notificações nativas da Twitch nem sempre entregam o alerta no momento exato em que a live inicia. Além disso, este projeto serviu como estudo prático para conceitos de infraestrutura em nuvem, Git e automação.
+## 💡 Motivation
 
-## 🛠 Tecnologias Utilizadas
-*   **Linguagem:** Python
-*   **Integrações:** Twitch API, Ntfy.sh (notificações)
-*   **Infraestrutura:** Render (Web Service)
-*   **Monitoramento:** UptimeRobot (para evitar hibernação do plano free)
-*   **Versionamento:** Git & GitHub
+Developed to solve a personal problem: native Twitch notifications do not always deliver the alert at the exact moment the stream starts. Additionally, this project served as a practical study for cloud infrastructure concepts, Git, and automation.
 
-## ⚙️ Como funciona a Infraestrutura
-O plano gratuito do Render hiberna serviços inativos. Para garantir que o bot rode 24/7, implementei um "servidor fake" interno que:
-1.  Responde a requisições `GET` e `HEAD`.
-2.  Mantém a porta do serviço sempre ativa para o UptimeRobot.
-3.  Executa em uma `threading` separada para não bloquear a lógica principal do bot.
+## 🛠️ Technologies Used
 
-## 🚀 Status do Projeto
-✅ Monitoramento ativo
-✅ Notificações em tempo real
-✅ Deploy automatizado com proteção contra hibernação
+* **Language:** Python
+* **Integrations:** Twitch API, Ntfy.sh (notifications)
+* **Infrastructure:** Render (Web Service)
+* **Monitoring:** UptimeRobot (to prevent free tier hibernation)
+* **Version Control:** Git & GitHub
+
+## ⚙️ How the Infrastructure Works
+
+Render's free plan hibernates inactive services. To ensure the bot runs 24/7, I implemented an internal "dummy server" that:
+
+1. Responds to `GET` and `HEAD` requests.
+2. Keeps the service port continually active for UptimeRobot.
+3. Runs on a separate `threading` to avoid blocking the bot's main logic.
+
+## 🚀 Project Status
+
+✅ Active monitoring ✅ Real-time notifications ✅ Automated deployment with anti-hibernation protection
 
 ---
-*Projeto desenvolvido como parte do portfólio de Ciência da Computação.*
+*Project developed as part of the Computer Science portfolio.*
