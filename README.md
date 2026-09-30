@@ -24,13 +24,27 @@ Render's free plan hibernates inactive services. To ensure the bot runs 24/7, I 
 
 ## 🧩 Architecture (OOP)
 
-The bot was refactored following object-oriented principles, with each class having a single responsibility:
+The bot was refactored following object-oriented principles, with each class living in its own module inside the `monitor/` package:
 
-* **`Config`** — Loads and validates environment variables.
-* **`Notifier`** — Sends notifications to Ntfy.sh.
-* **`KeepAliveServer`** — The internal dummy HTTP server (anti-hibernation).
-* **`StreamerState`** — Encapsulates the online/game state of a single channel.
-* **`TwitchStreamMonitor`** — Orchestrates the monitoring loop.
+```
+bot-twitch-monitor/
+├── bot.py                       # Entry point (main)
+└── monitor/
+    ├── __init__.py              # Public exports of the package
+    ├── config.py                # Config
+    ├── notifier.py              # Notifier
+    ├── keep_alive.py            # KeepAliveServer
+    ├── streamer_state.py        # StreamerState
+    └── twitch_monitor.py        # TwitchStreamMonitor
+```
+
+| Module / Class | Responsibility |
+| --- | --- |
+| `config.Config` | Loads and validates environment variables. |
+| `notifier.Notifier` | Sends notifications to Ntfy.sh. |
+| `keep_alive.KeepAliveServer` | The internal dummy HTTP server (anti-hibernation). |
+| `streamer_state.StreamerState` | Encapsulates the online/game state of a single channel. |
+| `twitch_monitor.TwitchStreamMonitor` | Orchestrates the monitoring loop. |
 
 ## 📡 Monitoring Multiple Channels
 
