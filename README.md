@@ -22,9 +22,40 @@ Render's free plan hibernates inactive services. To ensure the bot runs 24/7, I 
 2. Keeps the service port continually active for UptimeRobot.
 3. Runs on a separate `threading` to avoid blocking the bot's main logic.
 
+## 🧩 Architecture (OOP)
+
+The bot was refactored following object-oriented principles, with each class having a single responsibility:
+
+* **`Config`** — Loads and validates environment variables.
+* **`Notifier`** — Sends notifications to Ntfy.sh.
+* **`KeepAliveServer`** — The internal dummy HTTP server (anti-hibernation).
+* **`StreamerState`** — Encapsulates the online/game state of a single channel.
+* **`TwitchStreamMonitor`** — Orchestrates the monitoring loop.
+
+## 📡 Monitoring Multiple Channels
+
+You can now monitor several streamers at once. Set the `STREAMERS` environment variable with a comma-separated list:
+
+```
+STREAMERS=cellbit,gaules,loud_coringa
+```
+
+The legacy `STREAMER_NOME` variable is still supported for a single channel.
+
+### Environment Variables
+
+| Variable | Description | Default |
+| --- | --- | --- |
+| `TWITCH_CLIENT_ID` | Twitch application client ID | *(required)* |
+| `TWITCH_CLIENT_SECRET` | Twitch application client secret | *(required)* |
+| `STREAMERS` | Comma-separated list of channels to monitor | `cellbit` |
+| `TOPICO_NTFY` | Ntfy.sh topic for notifications | `bot_twitch` |
+| `INTERVALO_SEGUNDOS` | Polling interval in seconds | `60` |
+| `PORT` | Keep-alive server port | `8080` |
+
 ## 🚀 Project Status
 
-✅ Active monitoring ✅ Real-time notifications ✅ Automated deployment with anti-hibernation protection
+✅ Active monitoring ✅ Multi-channel support ✅ Real-time notifications ✅ Automated deployment with anti-hibernation protection
 
 ---
 *Project developed as part of the Computer Science portfolio.*
